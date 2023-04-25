@@ -11,7 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::create('customers', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained();
+            $table->string('name');
+            $table->string('lastname');
+            $table->string('birthdate');
+            $table->string('country');
+            $table->string('department');
+            $table->string('sub-prefecture');
+            $table->string('locality');
+            $table->string('address');
+            $table->boolean('is_actived')->default(true);
+            $table->boolean('is_deleted')->default(false);
+            $table->rememberToken();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -19,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('customers');
     }
 };

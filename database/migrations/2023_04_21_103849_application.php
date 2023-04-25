@@ -11,7 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::create('applications', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('account_id')->constrained();
+            $table->string('name')->unique();
+            $table->string('description');
+            $table->string('slug')->unique();
+            $table->boolean('is_actived')->default(true);
+            $table->boolean('is_deleted')->default(false);
+            $table->timestamps();
+        });
     }
 
     /**
@@ -19,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('applicatios');
     }
 };
